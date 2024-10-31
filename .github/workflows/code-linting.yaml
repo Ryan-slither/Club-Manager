@@ -7,7 +7,7 @@ on:
       - "main"
 
 jobs:
-  eslint-check:
+  Linting_Check:
     runs-on: ubuntu-latest
 
     steps:

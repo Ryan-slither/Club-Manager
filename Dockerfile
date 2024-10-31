@@ -19,7 +19,7 @@ RUN python -m venv /py && \
 
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
-    
+
 RUN /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
@@ -35,8 +35,11 @@ RUN adduser --no-create-home --system --disabled-password --disabled-login --gro
     chmod -R 755 /vol/static && \
     chmod -R +x /scripts
 
-
 COPY ./app /app
+
+RUN touch /app/.coverage && \
+    chown -R django-user:django-user /app/.coverage
+
 ENV PATH="/scripts:/py/bin:/usr/bin:$PATH"
 USER django-user
 
